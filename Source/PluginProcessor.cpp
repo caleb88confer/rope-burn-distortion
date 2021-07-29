@@ -166,7 +166,9 @@ bool RopeburndistortionAudioProcessor::hasEditor() const
 
 juce::AudioProcessorEditor* RopeburndistortionAudioProcessor::createEditor()
 {
-    return new RopeburndistortionAudioProcessorEditor (*this);
+//    return new RopeburndistortionAudioProcessorEditor (*this);
+    
+    return new juce::GenericAudioProcessorEditor(*this);
 }
 
 //==============================================================================
@@ -181,6 +183,20 @@ void RopeburndistortionAudioProcessor::setStateInformation (const void* data, in
 {
     // You should use this method to restore your parameters from this memory block,
     // whose contents will have been created by the getStateInformation() call.
+}
+
+juce::AudioProcessorValueTreeState::ParameterLayout
+    RopeburndistortionAudioProcessor::createParameterLayout()
+{
+        
+        juce::AudioProcessorValueTreeState::ParameterLayout layout;
+        
+        layout.add(std::make_unique<juce::AudioParameterFloat>("Drive",
+                                                               "Drive", juce::NormalisableRange<float>(0.f, 24.f, 0.5f, 1.f), 0.0f));
+        layout.add(std::make_unique<juce::AudioParameterFloat>("Range",
+                                                               "Range", juce::NormalisableRange<float>(20.f, 20000.f, 1.f, 1.f), 750.f));
+        
+        return layout;
 }
 
 //==============================================================================
