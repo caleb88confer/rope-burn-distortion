@@ -16,6 +16,17 @@ RopeburndistortionAudioProcessorEditor::RopeburndistortionAudioProcessorEditor (
     // Make sure that before the constructor has finished, you've set the
     // editor's size to whatever you need it to be.
     setSize (400, 300);
+    
+    driveControl.setValue(0);
+    driveControl.setRange(0.0, 1.0);
+    driveControl.setSliderStyle(juce::Slider::LinearBarVertical);
+    
+    rangeControl.setValue(0);
+    rangeControl.setRange(0.0, 1.0);
+    rangeControl.setSliderStyle(juce::Slider::LinearBarVertical);
+    
+    addAndMakeVisible(driveControl);
+    addAndMakeVisible(rangeControl);
 }
 
 RopeburndistortionAudioProcessorEditor::~RopeburndistortionAudioProcessorEditor()
@@ -30,11 +41,14 @@ void RopeburndistortionAudioProcessorEditor::paint (juce::Graphics& g)
 
     g.setColour (juce::Colours::white);
     g.setFont (15.0f);
-    g.drawFittedText ("Hello World!", getLocalBounds(), juce::Justification::centred, 1);
+//    g.drawFittedText ("Hello World!", getLocalBounds(), juce::Justification::centred, 1);
 }
 
 void RopeburndistortionAudioProcessorEditor::resized()
 {
     // This is generally where you'll want to lay out the positions of any
     // subcomponents in your editor..
+    
+    driveControl.setBounds (40, 30, 20, getHeight() -60);
+    rangeControl.setBounds (140, 30, 20, getHeight() -60);
 }
