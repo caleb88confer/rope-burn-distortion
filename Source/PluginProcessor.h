@@ -16,6 +16,8 @@
 class RopeburndistortionAudioProcessor  : public juce::AudioProcessor
 {
 public:
+    float driveAmount;
+    float rangeAmount;
     //==============================================================================
     RopeburndistortionAudioProcessor();
     ~RopeburndistortionAudioProcessor() override;

@@ -27,6 +27,15 @@ RopeburndistortionAudioProcessorEditor::RopeburndistortionAudioProcessorEditor (
     
     addAndMakeVisible(driveControl);
     addAndMakeVisible(rangeControl);
+    
+    driveControl.addListener(this);
+    rangeControl.addListener(this);
+}
+
+void RopeburndistortionAudioProcessorEditor::sliderValueChanged(juce::Slider* slider)
+{
+    audioProcessor.driveAmount = driveControl.getValue();
+    audioProcessor.rangeAmount = rangeControl.getValue();
 }
 
 RopeburndistortionAudioProcessorEditor::~RopeburndistortionAudioProcessorEditor()
