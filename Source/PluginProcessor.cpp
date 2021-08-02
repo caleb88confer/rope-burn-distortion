@@ -141,6 +141,10 @@ void RopeburndistortionAudioProcessor::processBlock (juce::AudioBuffer<float>& b
     // This is here to avoid people getting screaming feedback
     // when they first compile a plugin, but obviously you don't need to keep
     // this code if your algorithm always overwrites all the output channels.
+    auto d = apvts.getRawParameterValue("drive");
+    auto drive = d->load();
+    auto r = apvts.getRawParameterValue("range");
+    auto range = r->load();
     for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
         buffer.clear (i, 0, buffer.getNumSamples());
 
@@ -150,11 +154,23 @@ void RopeburndistortionAudioProcessor::processBlock (juce::AudioBuffer<float>& b
     // the samples and the outer loop is handling the channels.
     // Alternatively, you can process the samples with the channels
     // interleaved by keeping the same state.
+    
+    
     for (int channel = 0; channel < totalNumInputChannels; ++channel)
     {
         auto* channelData = buffer.getWritePointer (channel);
 
-        // ..do something to the data...
+//        create for loop to affect every audio sample
+        for (int sample = 0; sample < buffer.getNumSamples(); sample++)
+        {
+            auto cleanSig = *channelData;
+            
+            *channelData *= drive * range;
+            
+            *channelData = (2.f / juce::float_Pi) * atan(*channelData) + cleanSig;
+            
+            channelData++;
+        }
     }
 }
 
@@ -188,4 +204,22 @@ void RopeburndistortionAudioProcessor::setStateInformation (const void* data, in
 juce::AudioProcessor* JUCE_CALLTYPE createPluginFilter()
 {
     return new RopeburndistortionAudioProcessor();
+}
+
+juce::AudioProcessorValueTreeState::ParameterLayout RopeburndistortionAudioProcessor::createParameters()
+{
+std::vector<std::unique_ptr<juce::RangedAudioParameter>> params;
+    
+    params.push_back (std::make_unique<juce::AudioParameterFloat>("drive",
+                                                                  "Drive",
+                                                                  0.0f,
+                                                                  1.0f,
+                                                                  0.0f));
+    params.push_back (std::make_unique<juce::AudioParameterFloat>("range",
+                                                                  "Range",
+                                                                  0.0f,
+                                                                  3000.0f,
+                                                                  0.0f));
+    return { params.begin(), params.end() };
+    
 }
