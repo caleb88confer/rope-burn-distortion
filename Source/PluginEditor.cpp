@@ -44,11 +44,15 @@ RopeburndistortionAudioProcessorEditor::~RopeburndistortionAudioProcessorEditor(
 void RopeburndistortionAudioProcessorEditor::paint (juce::Graphics& g)
 {
     // (Our component is opaque, so we must completely fill the background with a solid colour)
-    g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));
-
+    g.fillAll (juce::Colour (255, 180, 95));
+    
+    
     g.setColour (juce::Colours::white);
-    g.setFont (15.0f);
-//    g.drawFittedText ("Hello World!", getLocalBounds(), juce::Justification::centred, 1);
+    g.setFont (30.0f);
+    g.drawFittedText ("Rope Burn", getLocalBounds(), juce::Justification::centredTop, 1);
+    
+    g.drawText("Drive", getWidth()/2 -161, getHeight()/2 -100, 100, 30, juce::Justification::centred);
+    g.drawText("Range", getWidth()/2 +41, getHeight()/2 -100, 100, 30, juce::Justification::centred);
 }
 
 void RopeburndistortionAudioProcessorEditor::resized()

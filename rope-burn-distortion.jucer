@@ -3,8 +3,9 @@
 <JUCERPROJECT id="JCKikr" name="rope-burn-distortion" projectType="audioplug"
               useAppConfig="0" addUsingNamespaceToJuceHeader="0" displaySplashScreen="1"
               jucerFormatVersion="1" pluginName="Rope Burn" pluginFormats="buildAU,buildStandalone,buildVST3"
-              pluginChannelConfigs="{1,1}, {2,2}" pluginVST3Category="Distortion,Fx"
-              cppLanguageStandard="17">
+              pluginChannelConfigs="{1,1}, {2,2}" pluginVST3Category="Distortion"
+              cppLanguageStandard="17" companyName="CalebConferAudio" pluginDesc="Distortion"
+              pluginManufacturerCode="Ccca" pluginCode="Rbdu">
   <MAINGROUP id="P73Ls2" name="rope-burn-distortion">
     <GROUP id="{1DD5737E-D496-8D6A-6168-F9F8A3E4DFFB}" name="Source">
       <FILE id="b99OJd" name="PluginProcessor.cpp" compile="1" resource="0"
@@ -20,8 +21,11 @@
   <EXPORTFORMATS>
     <XCODE_MAC targetFolder="Builds/MacOSX">
       <CONFIGURATIONS>
-        <CONFIGURATION isDebug="1" name="Debug" targetName="rope-burn-distortion"/>
-        <CONFIGURATION isDebug="0" name="Release" targetName="rope-burn-distortion"/>
+        <CONFIGURATION isDebug="1" name="Debug" targetName="rope-burn-distortion" vst3BinaryLocation="/Library/Audio/Plug-Ins/VST3"
+                       auBinaryLocation="/Library/Audio/Plug-Ins/Components" osxArchitecture="64BitIntel"/>
+        <CONFIGURATION isDebug="0" name="Release" targetName="rope-burn-distortion"
+                       vst3BinaryLocation="/Library/Audio/Plug-Ins/VST3" auBinaryLocation="/Library/Audio/Plug-Ins/Components"
+                       osxArchitecture="64BitIntel"/>
       </CONFIGURATIONS>
       <MODULEPATHS>
         <MODULEPATH id="juce_audio_basics" path="../../../../../Applications/JUCE/modules"/>
